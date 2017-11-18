@@ -1,0 +1,11 @@
+{
+  "name": "screeps",
+  "version": "1.0.0",
+  "description": "sh3rp implementation of screeps AI",
+  "main": "main",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
