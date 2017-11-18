@@ -6,6 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Shepherd Kendall <s@kndl.org>",
+  "license": "ISC",
+  "repository": "https://github.com/sh3rp/screeps",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-prompt": "^1.3.3",
+    "grunt-screeps": "^1.3.0"
+  }
 }
