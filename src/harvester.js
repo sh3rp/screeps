@@ -1,7 +1,7 @@
 'use strict';
 
 var Harvester = function(tracker) {
-    this.MAX_HARVESTERS = 12;
+    this.MAX_HARVESTERS = 15;
     this.S_HARVEST = 1;
     this.S_DISPENSE = 2;
 

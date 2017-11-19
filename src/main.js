@@ -17,9 +17,7 @@ if(global.harvester == undefined) {
     console.log("new harvester");    
 }
 Creep.prototype.setState = function(s) {
-    console.log("Setting state to " + s);
     this.memory.state = s;
-    console.log("[MEMORY] "+ this.name + " -> " + JSON.stringify(this.memory.state));
 }
 Creep.prototype.getState = function() {
     return this.memory.state;

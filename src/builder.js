@@ -11,6 +11,8 @@
 
 var Builder = function(tracker) {
     this.MAX_BUILDERS = 3;
+    this.S_BUILDING_ROAD = 10;
+    this.S_GATHERING = 11;
     this.tracker = tracker;
 };
 
@@ -34,7 +36,19 @@ Builder.prototype.getBuilders = function() {
 }; 
 
 Builder.prototype.build = function() {
-    console.log("Building.");
+    if(creep.getState() == this.S_GATHERING) {
+        var sources = creep.room.find(FIND_SOURCES);
+        if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(sources[0]);
+        } else {
+            if(creep.carry.energy == creep.carryCapacity) {
+                creep.setState(this.S_BUILDING);
+            }
+        }
+    } else if(creep.getState() == this.BUILDING_ROAD) {
+        var targets = tracker.trackByTerrain("swamp");
+
+    }
 };
 
 module.exports = Builder;
