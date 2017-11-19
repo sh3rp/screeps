@@ -1,23 +1,36 @@
+'use strict';
+
 var Harvester = function(tracker) {
     this.MAX_HARVESTERS = 12;
-    var S_HARVEST = 1;
-    var S_DISPENSE = 2;
+    this.S_HARVEST = 1;
+    this.S_DISPENSE = 2;
 
     this.tracker = tracker;
 };
 
 Harvester.prototype.harvest = function() {
     var harvesters = this.getHarvesters();
-    for(idx in harvesters) {
+    for(var idx in harvesters) {
         var creep = harvesters[idx];
+        
         this.tracker.mark(creep);
-        if(creep.memory['state'] == this.S_HARVEST) {
+        
+        // reset if state is undefined
+        if(creep.getState() === undefined) {
+            if(creep.carry.energy == 0) {
+                creep.setState(this.S_HARVEST);
+            } else {
+                creep.setState(this.S_DISPENSE);
+            }
+        }
+
+        if(creep.getState() == this.S_HARVEST) {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[0]);
             } else {
                 if(creep.carry.energy == creep.carryCapacity) {
-                    creep.memory['state'] = this.S_DISPENSE;
+                    creep.setState(this.S_DISPENSE);
                 }
             }
         } else {
@@ -26,7 +39,7 @@ Harvester.prototype.harvest = function() {
                     creep.moveTo(creep.room.controller);
                 }else {
                     if(creep.carry.energy == 0) {
-                        creep.memory['state'] = this.S_HARVEST;
+                        creep.setState(this.S_HARVEST);
                     }
                 }
             } else {
@@ -34,7 +47,7 @@ Harvester.prototype.harvest = function() {
                     creep.moveTo(Game.spawns['MainSpawn']);
                 } else {
                     if(creep.carry.energy == 0) {
-                        creep.memory['state'] = this.S_HARVEST;
+                        creep.setState(this.S_HARVEST);
                     }
                 }
             }

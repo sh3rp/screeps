@@ -6,7 +6,9 @@
  * var mod = require('builder');
  * mod.thing == 'a thing'; // true
  */
- 
+'use strict';
+
+
 var Builder = function(tracker) {
     this.MAX_BUILDERS = 3;
     this.tracker = tracker;
